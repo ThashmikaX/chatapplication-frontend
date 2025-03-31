@@ -16,9 +16,9 @@ pipeline {
         }
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'thashmikax-dockerhub-pass', variable: 'thashmikax-dockerhub-pass')]) {
+                withCredentials([string(credentialsId: 'dockerhub-pass', variable: 'jenkins-dockerhub-pass')]) {
                     script {
-                        bat "docker login -u thashmikax -p %thashmikax-dockerhub-pass%"
+                        bat "docker login -u thashmikax -p %jenkins-dockerhub-pass%"
                     }
                 }
             }
