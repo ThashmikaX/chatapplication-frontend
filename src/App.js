@@ -1,11 +1,12 @@
-import React from 'react'
-import ChatRoom from './components/ChatRoom'
+import React from 'react';
+import ChatApp from './components/ChatRoom';
 
-const App = () => {
+function App() {
   return (
-    <ChatRoom />
-  )
+    <div className="App">
+      <ChatApp />
+    </div>
+  );
 }
 
 export default App;
-
