@@ -18,6 +18,14 @@ const ChatApp = () => {
     const [previousUsers, setPreviousUsers] = useState([]);
     const messagesEndRef = useRef(null);
 
+    useEffect(() => {
+        if (user.isConnected) {
+            document.title = `${user.username} - Chat App`;
+        } else {
+            document.title = "Chat App";
+        }
+    }, [user.isConnected, user.username]);
+
     // Initialize socket connection
     useEffect(() => {
         const newSocket = io(BACKEND_URL);
