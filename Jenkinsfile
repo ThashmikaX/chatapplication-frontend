@@ -87,7 +87,7 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['aws_ec2_ssh']) {
+                sshagent(['aws1_ec2_ssh']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@13.51.162.118 "
                             sudo docker pull virajsamarasinghe/frontend1:latest && \
