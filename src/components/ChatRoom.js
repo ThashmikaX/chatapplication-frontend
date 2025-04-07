@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import "./ChatRoom.css";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5002";
+const BACKEND_URL = "http://13.51.162.118:5000";
 
 const ChatApp = () => {
     const [socket, setSocket] = useState(null);
