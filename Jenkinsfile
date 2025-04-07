@@ -52,7 +52,7 @@ pipeline {
                 script {
                     echo 'Building Docker image...'
                     if (fileExists('Dockerfile')) {
-                        sh 'docker build --platform linux/amd64 -t thashmikax/frontend:latest .'
+                        sh 'docker build --platform linux/amd64 -t virajsamarasinghe/frontend1:latest .'
                     } else {
                         error "Dockerfile not found in the repository."
                     }
@@ -62,7 +62,7 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: '80683663-c422-4b75-aae7-df46dd8d2112', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: '17c557a3-d03f-4d55-95de-d30503ff06da', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     script {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                     }
@@ -74,9 +74,9 @@ pipeline {
             steps {
                 script {
                     echo 'Pushing Docker image to Docker Hub...'
-                    if (sh(script: 'docker images -q thashmikax/frontend:latest', returnStatus: true) == 0) {
+                    if (sh(script: 'docker images -q virajsamarasinghe/frontend1:latest', returnStatus: true) == 0) {
                         retry(3) {
-                            sh 'docker push thashmikax/frontend:latest'
+                            sh 'docker push virajsamarasinghe/frontend1:latest'
                         }
                     } else {
                         error "Docker image not found. Build step might have failed."
@@ -90,10 +90,10 @@ pipeline {
                 sshagent(['aws_ec2_ssh']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@13.51.162.118 "
-                            sudo docker pull thashmikax/frontend:latest && \
+                            sudo docker pull virajsamarasinghe/frontend1:latest && \
                             sudo docker stop frontend || true && \
                             sudo docker rm -f frontend || true && \
-                            sudo docker run -d --name frontend -p 3000:3000 thashmikax/frontend:latest"
+                            sudo docker run -d --name frontend -p 3000:3000 virajsamarasinghe/frontend1:latest"
                     '''
                 }
             }

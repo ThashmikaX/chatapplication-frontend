@@ -1,14 +1,18 @@
-FROM node:18-alpine AS build
+# Use official Node.js image
+FROM node:18-alpine
 
+# Set working directory
 WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm ci --no-optional
+RUN npm install
 
+# Copy the rest of the app
 COPY . .
-RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+# Expose the port used by the React dev server
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+
+# Start the React app
+CMD ["npm", "start"]
