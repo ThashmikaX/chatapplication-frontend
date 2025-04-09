@@ -4,6 +4,7 @@ import "./ChatRoom.css";
 
 const BACKEND_URL = "http://13.51.162.118:5000";
 
+
 const ChatApp = () => {
     const [socket, setSocket] = useState(null);
     const [user, setUser] = useState({
